@@ -4,7 +4,7 @@ A trivial implementation of the classic mathematical *Josephus Problem* with an 
 ## Description
 The Josephus Problem is a theoretical problem related to a certain counting-out game. This implementation visualizes the problem in an interactive graphical user interface (GUI), allowing users to explore the problem's mechanics dynamically.
 
-![Main Menu](/resources/main.png)
+<img src="/resources/main.png" alt="Main Menu" width="300" height="500">
 
 ## Features
 - Intuitive GUI for visualizing the Josephus problem.
@@ -19,10 +19,10 @@ You will require a compiler supporting C++11 and Qt Creator IDE to build this pr
 3. Now with the project open build.
 4. Hit Run.
 
-![Gameplay](/resources/gameplay.png)
+<img src="/resources/gameplay.png" alt="Game Play" width="500" height="300">
 
 
-##Acknowledgments
+## Acknowledgments
 - Inspired by the classic Josephus Problem.
 - Developed using Qt for GUI implementation.
 
