@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include<QInputDialog>
 #include"secwindow.h"
+#include"prompt.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -21,16 +22,24 @@ public:
 private slots:
     void on_play_clicked();
 
-    void showInputDialog(int &n, int &k) {
-        bool ok;
-        n = QInputDialog::getInt(this, "Input n", "Enter number of soldiers (n):", 10, 1, 50, 1, &ok);
-        if (!ok) return;  // User canceled
+    void showInputDialog() {
+        int n, k;
+        prompt *dial = new prompt(this); // Create an instance of the prompt dialog
+        if (dial->exec() == QDialog::Accepted) {  // Show the dialog modally and check if "Done" was pressed
+            n = dial->getN();  // Get the value of n from the slider
+            k = dial->getK();  // Get the value of k from the slider
+            qDebug() << "Starting simulation with n:" << n << "k:" << k;
 
-         k = QInputDialog::getInt(this, "Input k", "Enter step count (k):", 3, 1, 5, 1, &ok);
-        if (!ok) return;  // User canceled
+            srand(time(0));
+            int s= rand() % n+1;
+            sec = new secwindow(n,k,s,this);
+            sec->show();
 
-        qDebug() << "Starting simulation with n:" << n << "k:" << k;
+        } else {
+            qDebug() << "Dialog canceled.";
+        }
     }
+
 
 
 

@@ -30,6 +30,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         resources.qrc
         secwindow.h secwindow.cpp secwindow.ui
         logic.h
+        prompt.h prompt.cpp prompt.ui
 
 
 

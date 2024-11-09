@@ -37,7 +37,7 @@ secwindow::secwindow(int n,int k,int s,QWidget *parent)
     {
         q.push(n - i + 1);
     }
-    srand(time(0));
+
 
     timer->start(1000);
 
