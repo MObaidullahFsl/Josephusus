@@ -16,12 +16,10 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_play_clicked()
 {
-   int n,k;
-    showInputDialog(n,k);
+
+    showInputDialog();
 // appear second window
-      int s= rand() % n + 1;
-    sec = new secwindow(n,k,s,this);
-    sec->show();
+
 
 
 }
