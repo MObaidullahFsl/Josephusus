@@ -63,7 +63,9 @@ border-width: 0px;
 border-radius: 3px;
 border:1px solid black;
 }
-QPushButton:hover { background-color: #290800; }
+QPushButton:hover { background-color: #330a00;
+padding: 9px 25px;
+ }
 #form{
 border-radius:10px;
 background-color:rgba(0,0,0,0.6);
