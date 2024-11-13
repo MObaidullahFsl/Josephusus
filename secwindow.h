@@ -15,7 +15,7 @@ class secwindow : public QDialog
     Q_OBJECT
 
 public:
-    explicit secwindow(int n,int k, int s ,QWidget *parent = nullptr);
+    explicit secwindow(int n,int k, int s ,bool dbug,QWidget *parent = nullptr);
     ~secwindow();
 void killSoldier(QList<QGraphicsPixmapItem *> &soldiers, int index);
 
@@ -29,6 +29,7 @@ private:
     int n;
     int k;
     int s;
+    bool dbug;
     std:: queue<int> q;
     QList<QGraphicsPixmapItem *> list;
 
@@ -38,7 +39,7 @@ private:
     QGraphicsScene * scene;
     QTimer *timer;
 
-    QList<QGraphicsPixmapItem *> arrangeSoldiers(int n);
+    QList<QGraphicsPixmapItem *> arrangeSoldiers(int n, bool dbug);
 
     void timerfunc() ;
 };
