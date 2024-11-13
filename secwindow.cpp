@@ -10,9 +10,9 @@
 #include <QDebug>
 #include "logic.h"
 
-secwindow::secwindow(int n,int k,int s,QWidget *parent)
+secwindow::secwindow(int n,int k,int s,bool dbug,QWidget *parent)
     : QDialog(parent)
-    , ui(new Ui::secwindow), n(n), k(k),s(s)
+    , n(n), k(k), s(s),ui(new Ui::secwindow), dbug(dbug)
 {
     ui->setupUi(this);
 
@@ -28,7 +28,7 @@ secwindow::secwindow(int n,int k,int s,QWidget *parent)
 
 
 
-    list = arrangeSoldiers(n);
+    list = arrangeSoldiers(n,dbug);
 
 
 
@@ -62,7 +62,7 @@ secwindow::secwindow(int n,int k,int s,QWidget *parent)
 
 }
 
-QList<QGraphicsPixmapItem *> secwindow::arrangeSoldiers(int n) {
+QList<QGraphicsPixmapItem *> secwindow::arrangeSoldiers(int n, bool dbug) {
     QList<QGraphicsPixmapItem *> soldiers; // List to store all soldier items
 
     QPixmap soldierPixmap(":/icons/resources/soldier.png");
@@ -83,12 +83,14 @@ QList<QGraphicsPixmapItem *> secwindow::arrangeSoldiers(int n) {
         soldiers.append(soldierItem); // Add soldier to the list
 
         // Create a text item to display the soldier's number
-       QGraphicsTextItem *numberItem = new QGraphicsTextItem(QString::number(i + 1)); // Display soldier number (1-based)
+        if (dbug){
+        QGraphicsTextItem *numberItem = new QGraphicsTextItem(QString::number(i + 1)); // Display soldier number (1-based)
        numberItem->setPos(x +50, y + 50); // Position it slightly offset from the soldier image
        numberItem->setDefaultTextColor(Qt::red); // Set text color to black
        numberItem->setFont(QFont("Arial", 12, QFont::Bold)); // Set font style and size
 
        scene->addItem(numberItem); // Add the text item to the scene
+        }
     }
 
     return soldiers; // Return the list of soldier items

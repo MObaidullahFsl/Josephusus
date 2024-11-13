@@ -35,6 +35,10 @@ int prompt::getK() const {
     return ui->kslider->value();  // Adjust for the actual name of your slider
 }
 
+int prompt::getdbug() const {
+    return ui->dbug->checkState();  // Adjust for the actual name of your slider
+}
+
 
 prompt::~prompt()
 {
@@ -68,4 +72,13 @@ void prompt::on_kslider_valueChanged(int value)
 {
      ui->kupdater->setText(QString::number(value));
 }
+
+
+// void prompt::on_dbug_stateChanged(int arg1)
+// {
+//     if(dbug){
+//         dbug = false;
+//     }else
+//         dbug = true;
+// }
 

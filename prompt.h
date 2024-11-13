@@ -26,6 +26,7 @@ public:
     QPropertyAnimation *animation; // Declare animation as a pointer
     int getN() const;  // Getter for the value of n from the slider
     int getK() const;  // Getter for the value of k from the slider
+     int getdbug() const;  // Getter for the value of k from the slider
 
 
 private slots:
@@ -33,6 +34,9 @@ private slots:
     void on_buttonBox_rejected();
     void on_nslider_valueChanged(int value);
     void on_kslider_valueChanged(int value);
+   // void on_dbug_stateChanged(int arg1);
+
 };
+
 
 #endif // PROMPT_H
