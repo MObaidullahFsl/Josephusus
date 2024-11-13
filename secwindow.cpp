@@ -83,12 +83,12 @@ QList<QGraphicsPixmapItem *> secwindow::arrangeSoldiers(int n) {
         soldiers.append(soldierItem); // Add soldier to the list
 
         // Create a text item to display the soldier's number
-       // QGraphicsTextItem *numberItem = new QGraphicsTextItem(QString::number(i + 1)); // Display soldier number (1-based)
-       // numberItem->setPos(x +50, y + 50); // Position it slightly offset from the soldier image
-       // numberItem->setDefaultTextColor(Qt::red); // Set text color to black
-       // numberItem->setFont(QFont("Arial", 12, QFont::Bold)); // Set font style and size
+       QGraphicsTextItem *numberItem = new QGraphicsTextItem(QString::number(i + 1)); // Display soldier number (1-based)
+       numberItem->setPos(x +50, y + 50); // Position it slightly offset from the soldier image
+       numberItem->setDefaultTextColor(Qt::red); // Set text color to black
+       numberItem->setFont(QFont("Arial", 12, QFont::Bold)); // Set font style and size
 
-       // scene->addItem(numberItem); // Add the text item to the scene
+       scene->addItem(numberItem); // Add the text item to the scene
     }
 
     return soldiers; // Return the list of soldier items
@@ -108,17 +108,21 @@ void secwindow::timerfunc()
         timer->stop();
     }
     if(q.size()!=1){
-    qDebug() << "Turn of:" << s;
-    int a = getnext(s, k, q);
-    qDebug() << "killing: " << a;
-    q = remove(a, q);
-    killSoldier(list,a);
 
-    printQueue(q);
-    int sindex = getindex(s, q);
-    int nextsindex = (++sindex) % q.size();
+        qDebug() << "Turn of:" << s;
 
-    s = getval(nextsindex, q);
+        int a = getnext(s, k, q);
+
+        int sindex = getindex(a,q);
+        int nextsindex = (++sindex) % q.size();
+        s = getval(nextsindex, q);
+
+        qDebug() << "killing: " << a;
+
+        q = remove(a, q);
+          killSoldier(list, a);
+
+        printQueue(q);
 }
 }
 

@@ -17,13 +17,13 @@ using namespace std;
 void printQueue(std::queue<int> q) {
     std::stack<int> temp;
 
-    // Move all elements from queue to stack
+
     while (!q.empty()) {
         temp.push(q.front());
         q.pop();
     }
 
-    // Print elements from stack to maintain the original queue order
+
     QString output;
     while (!temp.empty()) {
         output += QString::number(temp.top()) + " ";
@@ -32,6 +32,7 @@ void printQueue(std::queue<int> q) {
 
     qDebug() << output.trimmed();
 }
+
 
 
 int getval(int index, queue<int> q) {
@@ -47,14 +48,15 @@ int getval(int index, queue<int> q) {
 
 
 int getindex(int a, queue<int> b) {
-    int count = 1;
+    int count = 0;
     int size = b.size();
-    while (b.front() != a) {
+
+    while (b.front() != a && !b.empty()) {
         b.pop();
         count++;
     }
 
-    return (size - count);
+    return (size - count-1);
 
 }
 
@@ -65,32 +67,12 @@ int getnext(int s, int k, queue<int> q) {
     int b = q.front();
     int size = q.size();
     int sindex = getindex(s, q);
-    while (true) {
-        if (k<size) {
-            int b = temp.front();
-            temp.pop();
-            int bindex = getindex(b, q);
 
-            int comparer = (bindex - sindex);
-            if (bindex < sindex) {
-                int temp = size - abs(comparer);
-                comparer = temp;
-            }
+    int next = (sindex + k) % size;
+    next = getval(next,q);
 
+    return next;
 
-            if (comparer == k) {
-
-                return b;
-            }
-
-        }
-        else {
-            k--;
-        }
-
-
-
-    }
 
 }
 
@@ -99,20 +81,17 @@ queue<int> remove(int a, queue<int>q) {
     queue<int> temp;
     int count = 0;
     int size = q.size();
-    while (count != size) {
-        int b = q.front();
-        if (b != a)
-        {
-            temp.push(b);
+    while (!q.empty()) {
+        if (q.front()!=a) {
+            temp.push(q.front());
         }
-        count++;
         q.pop();
     }
 
     return temp;
 }
 
-void josephus(int n, int k,QList<QGraphicsPixmapItem *> list_of_soliders) {
+void josephus(int n, int k) {
 
     queue<int> q;
     for (int i = 1; i <= n; i++)
@@ -121,26 +100,34 @@ void josephus(int n, int k,QList<QGraphicsPixmapItem *> list_of_soliders) {
     }
 
     srand(time(0));
-    int s= rand() % n + 1;
+    int s = rand() % n + 1;
 
+    printQueue(q);
     while (q.size() != 1)
     {
-        qDebug() << "Turn of:" << s;
+        cout << endl;
+        cout << "Turn of:" << s;
+        cout << endl;
         int a = getnext(s, k, q);
-        qDebug() << "killing: " << a;
+
+        int sindex = getindex(a,q);
+        int nextsindex = (++sindex) % q.size();
+        s = getval(nextsindex, q);
+        cout << endl;
+        cout << "killing: " << a;
+        cout << endl;
         q = remove(a, q);
 
 
-        printQueue(q);
-        int sindex = getindex(s, q);
-        int nextsindex = (++sindex) % q.size();
 
-        s = getval(nextsindex, q);
+        printQueue(q);
+
 
 
     }
 
 }
+
 
 
 
